@@ -3,7 +3,7 @@ import logging
 from datetime import datetime 
 
 # Info to connect to mysql
-SQL_HOST = 'localhostt'
+SQL_HOST = 'localhost'
 SQL_PORT = 33060
 SQL_USER = 'tomcat'
 SQL_PASS = 'tomcat14'
