@@ -19,7 +19,7 @@ def main():
     
     # Creates a log file
     logging.basicConfig(
-        filename=f"logs/{datetime.now().strftime(LOG_TIME_FORMAT)}.log",
+        filename=f"logging/{datetime.now().strftime(LOG_TIME_FORMAT)}.log",
         format='%(levelname)s: %(message)s',
         filemode="a",
         level=logging.INFO
@@ -36,7 +36,6 @@ def main():
             'user': SQL_USER,
             'password': SQL_PASS
         })
-
     except Exception as e:
         logging.error(e)
         print(f"Cannot connect to MySQL with {SQL_USER}@{SQL_HOST}:{SQL_PORT}")
