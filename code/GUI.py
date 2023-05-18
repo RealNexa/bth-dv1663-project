@@ -164,6 +164,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.session = session
         self.username = username
 
+        self.setWindowTitle("Purchase Menu")
         self.resize(800,600)
         self.statusBar().addWidget(QtWidgets.QLabel(f"Logged in as: {username}"))
 

@@ -23,7 +23,6 @@ def initialize(session, db_name):
         functions.make_order(session, "person4", 4)
         functions.make_order(session, "person1", 2)
 
-    #TODO Add functions, triggers, etc
 
     session.sql("DROP TRIGGER IF EXISTS decrementStock").execute()
     decrement_stock_trigger = \
@@ -34,8 +33,11 @@ def initialize(session, db_name):
     END
     """
     session.sql(decrement_stock_trigger).execute()
-
+    print_and_log("Created trigger \"decrement_stock_trigger\"", logging.INFO)
+    
+    
     session.sql("DROP FUNCTION IF EXISTS usernameExist").execute()
+    # create a SQL function that check if the username exists in Customers when logging in
     check_login_username_function = \
     """
     CREATE FUNCTION usernameExist(inpUsername TEXT)
@@ -52,8 +54,11 @@ def initialize(session, db_name):
     END
     """
     session.sql(check_login_username_function).execute()
+    print_and_log("Created Function \"usernameExist\"", logging.INFO)
+
 
     session.sql("DROP FUNCTION IF EXISTS validUsername").execute()
+    # creates a SQL function that check if the username is valid when registering
     check_register_username_function = \
     """
     CREATE FUNCTION validUsername(inpUsername TEXT)
@@ -76,6 +81,8 @@ def initialize(session, db_name):
     END
     """
     session.sql(check_register_username_function).execute()
+    print_and_log("Created Function \"validUsername\"", logging.INFO)
+
 
 def create_and_use_database(session, name):
     """Try to create and use database"""
@@ -88,7 +95,6 @@ def create_and_use_database(session, name):
     finally:
         session.sql(f'USE {name};').execute()
         print_and_log(f"Using database \"{name}\"", logging.INFO)
-
 
 
 def create_table_customers(session):
@@ -166,6 +172,7 @@ def create_table_prebuilt_computers(session):
     except Exception as e:
         print_and_log(f"Failed to create table \"prebuiltComputers\", error {e}", logging.ERROR)
         return False
+
 
 def insert_into_prebuilt_computers(session):
     ComputerName = ["Karlskrona Special", "Next Gen Gaming Computer", "Traditional Work Computer", "Low-end Budget Computer"]
